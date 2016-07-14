@@ -14,7 +14,8 @@ class Nerve::Reporter
       # service to be on multiple ports of a same machine.
 
       # FIXME: support IPv6?
-      @data        = "#{service['host']}:#{service['port']}"
+      host = service['advertise_host'] || service['host']
+      @data        = "#{host}:#{service['port']}"
       @config_file = File.join(@config_dir,"zzz_nerve_#{@name}.json")
       File.unlink @config_file if File.exists? @config_file
     end
